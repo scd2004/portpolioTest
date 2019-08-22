@@ -55,12 +55,12 @@
 				<td><form:input path="name" /></td>
 			</tr>
 			<tr>
-				<td><form:label path="mail">가입인증 이메일</form:label></td>
-				<td><form:input path="mail" /></td>
+				<td><form:label path="mail01">가입인증 이메일</form:label></td>
+				<td><form:input path="mail01" /></td>
 				<td>@</td>
 				<td>
 					<!-- 이거 되면 나머지 이메일 주소도 추가할것 --> <select name="email02">
-						<option value="email02">gmail.com</option>
+						<option id="mail02" value="gmail.com">gmail.com</option>
 				</select>
 				</td>
 			</tr>

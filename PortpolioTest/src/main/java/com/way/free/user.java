@@ -10,6 +10,8 @@ public class user {
 	private String mail;
 	private String stie;
 	private Integer coin;
+	private String mail01;
+	private String mail02;
 	public String getId() {
 		return id;
 	}
@@ -30,6 +32,18 @@ public class user {
 	}
 	public Boolean getFixnic() {
 		return fixnic;
+	}
+	public String getMail01() {
+		return mail01;
+	}
+	public void setMail01(String mail01) {
+		this.mail01 = mail01;
+	}
+	public String getMail02() {
+		return mail02;
+	}
+	public void setMail02(String mail02) {
+		this.mail02 = mail02;
 	}
 	public void setFixnic(Boolean fixnic) {
 		this.fixnic = fixnic;

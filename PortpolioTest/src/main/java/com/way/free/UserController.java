@@ -27,4 +27,11 @@ public class UserController {
 		//여기서 signUp03 페이지로 리턴할지 말지 결정 후 추가 메소드 설정
 		return "signUp/signUp02";
 	}
+	
+	@RequestMapping(value = "/add/signUp.do", method = RequestMethod.POST)
+	public String addUser(@ModelAttribute user user, Model model) {
+		model.addAttribute("user", user);
+		userDao.create(user);
+		return "signUp/signUp03";
+	}
 }

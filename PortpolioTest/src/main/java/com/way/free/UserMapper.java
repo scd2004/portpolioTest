@@ -23,7 +23,9 @@ public class UserMapper implements RowMapper<user> {
 		user.setFixnic(fixnick);
 		user.setPassword(rs.getString("password"));
 		user.setName(rs.getString("name"));
-		user.setMail(rs.getString("email1")+"@"+rs.getString("email02"));
+		user.setMail01(rs.getString("mail01"));
+		user.setMail02(rs.getString("mail02"));
+		user.setMail(rs.getString("mail01")+"@"+rs.getString("mail02"));
 		user.setStie(rs.getString("site"));
 		user.setCoin(rs.getInt("coin"));
 		return user;
