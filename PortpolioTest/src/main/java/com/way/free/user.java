@@ -6,12 +6,12 @@ public class user {
 	private String nick;
 	private Boolean fixnic;
 	private String password;
+	private String passwordcheck;
 	private String name;
 	private String mail;
 	private String stie;
 	private Integer coin;
 	private String mail01;
-	private String mail02;
 	public String getId() {
 		return id;
 	}
@@ -39,12 +39,6 @@ public class user {
 	public void setMail01(String mail01) {
 		this.mail01 = mail01;
 	}
-	public String getMail02() {
-		return mail02;
-	}
-	public void setMail02(String mail02) {
-		this.mail02 = mail02;
-	}
 	public void setFixnic(Boolean fixnic) {
 		this.fixnic = fixnic;
 	}
@@ -53,6 +47,13 @@ public class user {
 	}
 	public void setPassword(String password) {
 		this.password = password;
+	}
+	
+	public String getPasswordcheck() {
+		return passwordcheck;
+	}
+	public void setPasswordcheck(String passwordcheck) {
+		this.passwordcheck = passwordcheck;
 	}
 	public String getName() {
 		return name;
