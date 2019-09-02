@@ -18,6 +18,7 @@ import com.way.free.user;
 @Repository("userDAO")
 @Component
 public class UserDao {
+	//로그인 메소드 나중에 수정하기!!!
 	private JdbcTemplate jdbcTemplate;
 	private Connection conn = null;
 	private PreparedStatement stmt = null;
@@ -48,7 +49,7 @@ public class UserDao {
 		}
 		return user;
 	}
-	
+	//여기까지 로그인 메소드
 	
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
@@ -57,15 +58,8 @@ public class UserDao {
 	
 	//sign up
 	public void create(user user) {
-		String sql = "insert into user(id, role, nick, fixnic, password, name, mail, site, coin) values (?, ?, ?, ?, ?, ?, ?, ?, ?)";
-		jdbcTemplate.update(sql, user.getId(),user.getRole(),user.getNick(),user.getFixnic(),user.getPassword(),user.getName(),user.getMail()+"@"+user.getMail01(),user.getStie(),user.getCoin());
-	}
-	
-	//id check
-	public user checkid(String id) {
-		String sql = "select * from user where id = ?";
-		user users = jdbcTemplate.queryForObject(sql, new Object [] {id}, new UserMapper());
-		return users;
+		String sql = "insert into user(id, role, nick, fixnic, password, name, mail, mail01, site, coin) values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+		jdbcTemplate.update(sql, user.getId(),user.getRole(),user.getNick(),user.getFixnic(),user.getPassword(),user.getName(),user.getMail(), user.getMail01(),user.getStie(),user.getCoin());
 	}
 	
 	//회원조회 메소드
@@ -90,10 +84,21 @@ public class UserDao {
 	
 	//회원이메일 수정 메소드
 		public void updateEmail(user user) {
-			String sql = "update user set mail=?, mail01 where id = ?";
+			String sql = "update user set mail=?, mail01=? where id = ?";
 			jdbcTemplate.update(sql, user.getMail(),user.getMail01(),user.getId());
 		}
 	
+	// 패스워드 수정 메소드
+		public void updatepassword(user user) {
+			String sql = "update user set password=? where id = ?";
+			jdbcTemplate.update(sql, user.getNewpassword(), user.getId());
+		}
 	
+		public void delete(user user) {
+			String sql = "delete from user where id = ?";
+			jdbcTemplate.update(sql, user.getId());
+		}
+	//회원 삭제 메소드
 	
+		
 }

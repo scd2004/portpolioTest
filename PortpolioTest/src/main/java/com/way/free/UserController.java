@@ -24,6 +24,11 @@ public class UserController {
 	@Autowired
 	private UserDao userDao;
 	
+	@RequestMapping(value = "/agreementPage.do", method={RequestMethod.POST,RequestMethod.GET})
+	public String agreement() {
+		return "signUp/signUp01";
+	}
+	
 	@RequestMapping(value = "/signUp.do", method = {RequestMethod.POST,RequestMethod.GET})
 	public String SignUp(Model model) {
 		model.addAttribute("user", new user());
@@ -65,10 +70,66 @@ public class UserController {
 	
 	//닉네임 변경 요청 오류 잡을것!!!!!!!!
 	@RequestMapping(value = "/update_userNick.do", method = {RequestMethod.POST,RequestMethod.GET})
-	public String updateNick(@ModelAttribute user user,Model model, @RequestParam(value = "id", required = true) String id) {
-		model.addAttribute("user", userDao.select(id));
+	public String updateNick(@ModelAttribute user user) {
 		userDao.updateNick(user);
-		return "redirect:/move_updateNick.do?id="+user.getId();
+		return "redirect:/userInfo01.do?id="+user.getId();
 	}
 	
+	//이메일 변경 페이지 이동 요청
+	@RequestMapping(value= "/move_updateEmail.do", method={RequestMethod.POST,RequestMethod.GET})
+	public String moveUpdateEmail(Model model, @RequestParam(value = "id", required = true) String id) {
+		model.addAttribute("user", userDao.select(id));
+		return "userInfo/updateEmail";
+	}
+	
+	//이메일 변경
+	@RequestMapping(value = "/update_userEmail.do", method = {RequestMethod.POST,RequestMethod.GET})
+	public String updateEmail(@ModelAttribute user user) {
+		userDao.updateEmail(user);
+		return "redirect:/userInfo01.do?id="+user.getId();
+	}
+	
+	//패스워드 변경 페이지 이동 요청
+		@RequestMapping(value= "/move_updatePassword.do", method={RequestMethod.POST,RequestMethod.GET})
+		public String moveUpdatePassword(Model model, @RequestParam(value = "id", required = true) String id) {
+			model.addAttribute("user", userDao.select(id));
+			return "userInfo/updatePassword";
+		}
+		
+		//패스워드 변경
+		@RequestMapping(value = "/update_password.do", method = {RequestMethod.POST,RequestMethod.GET})
+		public String updatePassword(@ModelAttribute user user, @RequestParam(value="newpassword", required = true) String newpassword) {
+			if(!newpassword.equals(user.getPassword())) {
+			user.setNewpassword(newpassword);
+			userDao.updatepassword(user);
+			return "redirect:/userInfo01.do?id="+user.getId();
+			} else {
+			return "redirect:/move_updatePassword.do?id="+user.getId();
+			}
+		}
+		
+		//회원 삭제전 비밀번호 입력 창
+		@RequestMapping(value="/predelete_userInfo.do", method={RequestMethod.POST,RequestMethod.GET})
+		public String movePreUpdate(Model model,
+				@RequestParam(value = "id", required = true) String id) {
+			model.addAttribute("user", userDao.select(id));
+				return "userInfo/preDeleteUser";
+		}
+		
+		//회원 삭제 페이지 이동 요청
+		@RequestMapping(value = "/move_deleteUser.do", method = {RequestMethod.POST,RequestMethod.GET})
+		public String moveDeleteUser(Model model,@ModelAttribute user user,@RequestParam(value = "id", required = true) String id,@RequestParam(value = "passwordConfirm", required = true) String passwordConfirm) {
+			if(!passwordConfirm.equals(user.getPassword())) {
+			return "redirect:/predelete_userInfo.do";
+			} else {
+				model.addAttribute("user", userDao.select(id));
+				return "userInfo/deleteUser"; 
+			}
+		}
+		
+		@RequestMapping(value = "/deleteUser.do", method = {RequestMethod.POST,RequestMethod.GET})
+		public String deleteUser(@ModelAttribute user user ,@RequestParam(value="id", required = true) String id) {
+			userDao.delete(user);
+			return "redirect:/login.do";
+		}
 }

@@ -70,7 +70,7 @@
 		</tr>
 		</tr>
 	</table>
-	<form:form name="user" method="POST" commandName="user" action = "MemberJoinAction.do" onsubmit="return checkValue()">
+	<form:form name="user" method="POST" commandName="user" action = "add/signUp.do" onsubmit="return checkValue()">
 		<table align="center">
 			<tr>
 				<td><form:label path="id"  >아이디 입력</form:label></td>
@@ -106,7 +106,7 @@
 				<form:input path="mail" />
 				@
 				<select name="mail01">
-						<option value='nate.com'>nate.com</option>
+								<option value='nate.com'>nate.com</option>
 								<option value='empas.com'>empas.com</option>
 								<option value='dreamwiz.com'>dreamwiz.com</option>
 								<option value='gmail.com'>gmail.com</option>

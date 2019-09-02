@@ -7,6 +7,7 @@ public class user {
 	private Boolean fixnic;
 	private String password;
 	private String passwordcheck;
+	private String newpassword;
 	private String name;
 	private String mail;
 	private String stie;
@@ -54,6 +55,13 @@ public class user {
 	}
 	public void setPasswordcheck(String passwordcheck) {
 		this.passwordcheck = passwordcheck;
+	}
+	
+	public String getNewpassword() {
+		return newpassword;
+	}
+	public void setNewpassword(String newpassword) {
+		this.newpassword = newpassword;
 	}
 	public String getName() {
 		return name;
